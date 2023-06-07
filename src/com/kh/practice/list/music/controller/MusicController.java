@@ -1,6 +1,10 @@
 package com.kh.practice.list.music.controller;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import com.kh.practice.list.music.model.compare.AscTitle;
 import com.kh.practice.list.music.model.vo.Music;
 
 public class MusicController {
@@ -25,8 +29,10 @@ public class MusicController {
 	    public Music searchMusic(String title) {
 	    	Music result=null;
 	    	for(Music vo:list)
-	    		if(vo.getTitle().equals(title))
+	    		if(vo.getTitle().equals(title)) {
 	    			result= vo;
+	    			break;
+	    		}
 	    		return result;
 	    }
 	    	public Music removeMusic(String title) {
@@ -59,12 +65,13 @@ public class MusicController {
 		    	}
 	    	}
 	    	public int ascTitle() {
+	    		Comparator<Music> A = new AscTitle();
+	    		Collections.sort(list,A);
 	    		return 1;
-	    	// 리스트 곡 명 오름차순 정렬, 제목이 같으면 가수 명으로 오름차순 정렬, 1 리턴
 	    	}
 	    	public int descSinger() {
+	    		Collections.sort(list,Collections.reverseOrder());
 	    		return 1;
-	    	// 리스트 가수 명 내림차순 정렬, 1 리턴
 	    	}
 }
 
